@@ -7,214 +7,71 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
-
   <style>
-    /* --- 共通変数：カフェ＆クラフト配色 --- */
-    :root {
-      --main-green: #88c999;
-      --sub-green: #eaf6ee;
-      --accent-pink: #ff9e9e;
-      --accent-yellow: #fceea7;
-      --text-brown: #5a4e44;
-      --bg-cream: #fdfcf8;
-      --border-color: #5a4e44;
-      --shadow-color: rgba(90, 78, 68, 0.2);
-    }
-
-    body {
-      font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
-      margin: 0;
-      background-color: var(--bg-cream);
-      color: var(--text-brown);
-      line-height: 1.7;
-      background-image:
-        linear-gradient(90deg, transparent 95%, #f2efe9 95%),
-        linear-gradient(transparent 95%, #f2efe9 95%);
-      background-size: 40px 40px;
-    }
-
+    :root { --main-green: #88c999; --sub-green: #eaf6ee; --accent-pink: #ff9e9e; --accent-yellow: #fceea7; --text-brown: #5a4e44; --bg-cream: #fdfcf8; }
+    body { font-family: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif; margin: 0; background-color: var(--bg-cream); color: var(--text-brown); line-height: 1.7; background-image: linear-gradient(90deg, transparent 95%, #f2efe9 95%), linear-gradient(transparent 95%, #f2efe9 95%); background-size: 40px 40px; }
     a { text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
     ul { list-style: none; padding: 0; margin: 0; }
     img { max-width: 100%; height: auto; display: block; }
-
-    .hand-drawn-box {
-      border: 2px solid var(--text-brown);
-      border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-    }
-
-    /* --- ヘッダー --- */
-    .l-header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(5px);
-      position: sticky; top: 0; z-index: 100;
-      border-bottom: 3px dashed var(--main-green);
-      padding: 10px 0;
-    }
-    .l-header__inner {
-      max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
-    }
-    .site-logo {
-      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-      line-height: 1.2;
-    }
-    .site-logo .sub-title {
-      font-size: 11px; font-weight: bold; color: var(--text-brown); margin-bottom: -2px;
-    }
-    .site-logo .main-title {
-      font-size: 26px; font-weight: 800; color: var(--text-brown);
-      display: flex; align-items: center; gap: 8px;
-    }
+    .hand-drawn-box { border: 2px solid var(--text-brown); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; }
+    .l-header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); position: sticky; top: 0; z-index: 100; border-bottom: 3px dashed var(--main-green); padding: 10px 0; }
+    .l-header__inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+    .site-logo { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1.2; }
+    .site-logo .sub-title { font-size: 11px; font-weight: bold; color: var(--text-brown); margin-bottom: -2px; }
+    .site-logo .main-title { font-size: 26px; font-weight: 800; color: var(--text-brown); display: flex; align-items: center; gap: 8px; }
     .site-logo i { color: var(--main-green); font-size: 22px; transform: rotate(-10deg); }
-
-    .header-btn {
-      background: var(--accent-pink);
-      color: #fff; padding: 8px 20px;
-      border-radius: 30px; font-weight: bold; font-size: 14px;
-      box-shadow: 3px 3px 0 var(--text-brown);
-      border: 2px solid var(--text-brown);
-      display: inline-block; text-align: center;
-    }
+    .header-btn { background: var(--accent-pink); color: #fff; padding: 8px 20px; border-radius: 30px; font-weight: bold; font-size: 14px; box-shadow: 3px 3px 0 var(--text-brown); border: 2px solid var(--text-brown); display: inline-block; text-align: center; }
     .header-btn:active { transform: translate(3px, 3px); box-shadow: none; }
-
-    /* --- ナビゲーション --- */
     .l-nav { background: var(--main-green); padding: 8px 0; overflow-x: auto; }
     .l-nav__list { display: flex; justify-content: center; min-width: max-content; padding: 0 20px; gap: 10px; }
-    .l-nav__item a {
-      color: #fff; font-weight: bold; padding: 5px 15px; border-radius: 15px;
-      border: 2px solid transparent; display: inline-block; white-space: nowrap;
-    }
-    .l-nav__item a:hover, .l-nav__item a.active {
-      background: #fff; color: var(--main-green); border-color: #fff; border-style: dashed;
-    }
-
-    /* --- レイアウト --- */
+    .l-nav__item a { color: #fff; font-weight: bold; padding: 5px 15px; border-radius: 15px; border: 2px solid transparent; display: inline-block; white-space: nowrap; }
+    .l-nav__item a:hover, .l-nav__item a.active { background: #fff; color: var(--main-green); border-color: #fff; border-style: dashed; }
     .l-container { max-width: 1100px; margin: 40px auto; display: flex; gap: 40px; padding: 0 20px; }
     .l-main { flex: 1; transition: 0.3s; }
     .l-sidebar { width: 300px; flex-shrink: 0; transition: 0.3s; }
-
-    /* --- 広告表示制御 --- */
     .sp-only-ad { display: none; margin-bottom: 20px; }
-   
-    @media (max-width: 850px) {
-      .l-container { flex-direction: column; }
-      .l-sidebar { width: 100%; }
-      .sp-hide-ad { display: none !important; }
-      .sp-only-ad { display: block; }
-      .sidebar-top-ad { display: none !important; }
-    }
-
-    /* --- 検索ボックス＆見出し --- */
-    .p-search-box {
-      background: #fff; padding: 30px; margin-bottom: 20px;
-      position: relative; text-align: center;
-      box-shadow: 6px 6px 0 var(--sub-green);
-    }
-    .section-title {
-      display: inline-block;
-      background: var(--accent-yellow); color: var(--text-brown);
-      padding: 5px 20px; transform: rotate(-2deg);
-      box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-      font-size: 20px; font-weight: 800; margin: 0 0 20px;
-    }
-
+    @media (max-width: 850px) { .l-container { flex-direction: column; } .l-sidebar { width: 100%; } .sp-hide-ad { display: none !important; } .sp-only-ad { display: block; } .sidebar-top-ad { display: none !important; } }
+    .p-search-box { background: #fff; padding: 30px; margin-bottom: 20px; position: relative; text-align: center; box-shadow: 6px 6px 0 var(--sub-green); }
+    .section-title { display: inline-block; background: var(--accent-yellow); color: var(--text-brown); padding: 5px 20px; transform: rotate(-2deg); box-shadow: 2px 2px 4px rgba(0,0,0,0.1); font-size: 20px; font-weight: 800; margin: 0 0 20px; }
     .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-    .tag {
-      padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold;
-      background: #fff; border: 2px solid #ddd; color: var(--text-brown);
-      box-shadow: 2px 2px 0 #eee; cursor: pointer; user-select: none;
-    }
+    .tag { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; background: #fff; border: 2px solid #ddd; color: var(--text-brown); box-shadow: 2px 2px 0 #eee; cursor: pointer; user-select: none; }
     .tag:hover, .tag.active { transform: translateY(-2px); box-shadow: 2px 4px 0 #ddd; }
     .tag.pink { border-color: var(--accent-pink); background: #fff0f0; }
     .tag.green { border-color: var(--main-green); background: #f0fff4; }
     .tag.yellow { border-color: var(--accent-yellow); background: #fffff0; }
     .tag.active { background: var(--text-brown) !important; color: #fff; border-color: var(--text-brown) !important; }
-
-    .filter-sub-title {
-      font-size: 15px; font-weight: bold; margin: 25px 0 10px;
-      color: var(--text-brown); border-bottom: 2px dashed var(--main-green);
-      display: inline-block; padding-bottom: 2px;
-    }
-
-    /* --- 広告エリア --- */
-    .c-ad-area {
-      background: #f4f4f4; border: 2px dashed #ccc; padding: 20px;
-      text-align: center; margin-bottom: 40px; border-radius: 10px;
-      position: relative; overflow: hidden;
-    }
-    .c-ad-area img {
-      width: 100%; height: 100%; object-fit: cover; display: none;
-    }
-    .c-ad-label {
-      position: absolute; top: 0; left: 0; background: #ccc; color: #fff;
-      font-size: 10px; padding: 2px 8px; border-radius: 0 0 5px 0; z-index: 2;
-    }
-
-    /* --- カード --- */
+    .filter-sub-title { font-size: 15px; font-weight: bold; margin: 25px 0 10px; color: var(--text-brown); border-bottom: 2px dashed var(--main-green); display: inline-block; padding-bottom: 2px; }
+    .c-ad-area { background: #f4f4f4; border: 2px dashed #ccc; padding: 20px; text-align: center; margin-bottom: 40px; border-radius: 10px; position: relative; overflow: hidden; }
+    .c-ad-area img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .c-ad-label { position: absolute; top: 0; left: 0; background: #ccc; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 0 0 5px 0; z-index: 2; }
     .c-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-    .c-card {
-      background: #fff; padding: 10px 10px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border: 1px solid #eee; transform: rotate(1deg); transition: 0.3s; display: block;
-    }
+    .c-card { background: #fff; padding: 10px 10px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; transform: rotate(1deg); transition: 0.3s; display: block; }
     .c-card:nth-child(even) { transform: rotate(-1deg); }
     .c-card:hover { transform: scale(1.02) rotate(0); z-index: 10; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-
     .c-card__img { height: 180px; overflow: hidden; position: relative; border-radius: 4px; border: 2px solid #555; }
     .c-card__img img { width: 100%; height: 100%; object-fit: cover; }
-    .c-cat-label {
-      position: absolute; top: -5px; left: -5px; padding: 5px 10px;
-      background: var(--text-brown); color: #fff; font-size: 11px; font-weight: bold;
-      transform: rotate(-10deg); border: 1px solid #fff; z-index: 2;
-    }
+    .c-cat-label { position: absolute; top: -5px; left: -5px; padding: 5px 10px; background: var(--text-brown); color: #fff; font-size: 11px; font-weight: bold; transform: rotate(-10deg); border: 1px solid #fff; z-index: 2; }
     .c-card__body { padding-top: 15px; }
     .c-card__title { font-size: 17px; font-weight: bold; margin: 5px 0; line-height: 1.5; }
     .c-rating { color: #f39c12; font-size: 13px; }
-
-    /* --- ランキング --- */
-    .ranking-list li {
-      display: flex; align-items: center; padding: 15px 0; border-bottom: 2px dashed #e0d8cc;
-    }
-    .rank-num {
-      width: 32px; height: 32px; line-height: 32px; text-align: center;
-      background: var(--accent-yellow); border: 2px solid var(--text-brown);
-      border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0;
-    }
+    .ranking-list li { display: flex; align-items: center; padding: 15px 0; border-bottom: 2px dashed #e0d8cc; }
+    .rank-num { width: 32px; height: 32px; line-height: 32px; text-align: center; background: var(--accent-yellow); border: 2px solid var(--text-brown); border-radius: 50%; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
     .rank-num.top { background: var(--accent-pink); color: #fff; }
-
-    /* --- フッター --- */
-    .l-footer {
-      background: var(--text-brown); color: #fff; text-align: center; padding: 40px 0; margin-top: 60px;
-      border-top: 8px solid var(--main-green);
-    }
-
-    /* --- SPA用 --- */
+    .l-footer { background: var(--text-brown); color: #fff; text-align: center; padding: 40px 0; margin-top: 60px; border-top: 8px solid var(--main-green); }
     .page-section { display: none; animation: fadeIn 0.5s; }
     .page-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* --- フォーム・追加機能用 --- */
     .form-group { margin-bottom: 20px; text-align: left; }
     .form-label { display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-brown); }
-    .form-input, .form-textarea, .form-select {
-      width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 16px; box-sizing: border-box;
-    }
-    .submit-btn {
-      background: var(--main-green); color: #fff; border: none; padding: 15px 40px;
-      font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer;
-      box-shadow: 0 4px 0 #6ba57a; transition: 0.2s;
-    }
+    .form-input, .form-textarea, .form-select { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 16px; box-sizing: border-box; }
+    .submit-btn { background: var(--main-green); color: #fff; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 0 #6ba57a; transition: 0.2s; }
     .submit-btn:active { transform: translateY(4px); box-shadow: none; }
     .submit-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; transform: none; }
-
     .checkbox-wrap { display: flex; flex-wrap: wrap; gap: 15px; }
     .checkbox-wrap label { cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 15px; }
-
     .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 40px; }
-    .pagination button {
-      background: #fff; border: 2px solid var(--text-brown); padding: 5px 15px; border-radius: 20px;
-      font-weight: bold; cursor: pointer; color: var(--text-brown);
-    }
+    .pagination button { background: #fff; border: 2px solid var(--text-brown); padding: 5px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; color: var(--text-brown); }
     .pagination button.active { background: var(--text-brown); color: #fff; }
-
     .comment-box { background: var(--sub-green); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--main-green); }
     .comment-header { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin-bottom: 5px; }
   </style>
@@ -256,8 +113,6 @@
           <div style="margin-bottom: 20px;">
             <h2 class="section-title">条件から探す</h2>
           </div>
-
-          <!-- キーワード検索の追加 -->
           <div style="margin-bottom: 25px;">
             <div class="filter-sub-title" style="margin-top:0;"><i class="fas fa-search"></i> キーワード検索</div>
             <div style="display:flex; justify-content:center; gap:10px;">
@@ -265,7 +120,6 @@
               <button type="button" onclick="searchByKeyword()" class="header-btn" style="border-radius:8px;">検索</button>
             </div>
           </div>
-         
           <div style="margin-bottom: 25px;">
             <div class="filter-sub-title" style="margin-top:0;"><i class="fas fa-child"></i> お子様の年齢</div>
             <div class="tag-cloud">
@@ -277,7 +131,6 @@
               <a onclick="searchByTag('中学生')" class="tag pink">中学生</a>
             </div>
           </div>
-
           <div style="margin-bottom: 25px;">
             <div class="filter-sub-title" style="margin-top:0;"><i class="fas fa-shapes"></i> 探したいカテゴリー</div>
             <div class="tag-cloud">
@@ -289,7 +142,6 @@
               <a onclick="router('category', 'ワークシート')" class="tag green">ワークシート</a>
             </div>
           </div>
-
           <div style="margin-bottom: 10px;">
             <div class="filter-sub-title" style="margin-top:0;"><i class="fas fa-star"></i> 学べるスキル・目的</div>
             <div class="tag-cloud">
@@ -325,13 +177,11 @@
           <div id="search-filters" style="text-align:center; margin-top:10px;"></div>
           <button type="button" onclick="applyFilterSearch()" class="header-btn" style="margin-top:30px;">この条件で絞り込む</button>
         </section>
-
         <a id="ad-link-category" href="#" target="_blank" class="c-ad-area" style="padding:10px; margin-bottom:40px; display:block;">
           <span class="c-ad-label">PR</span>
           <div id="ad-text-category" style="background:#fff; height:90px; line-height:90px; color:#ddd;">[ カテゴリバナー 728x90 ]</div>
           <img id="ad-img-category" src="" alt="広告">
         </a>
-
         <section>
           <h2 id="cat-result-title" class="section-title" style="background:var(--sub-green);">新着一覧</h2>
           <div id="cat-results" class="c-card-grid">
@@ -345,12 +195,9 @@
         <section class="hand-drawn-box" style="padding:30px; background:#fff;">
           <button type="button" onclick="history.back()" style="background:none; border:none; color:var(--main-green); cursor:pointer; font-weight:bold; margin-bottom:15px;">&lt; 戻る</button>
           <div id="detail-content"></div>
-
           <hr style="border:1px dashed #ccc; margin:30px 0;">
-
           <h3 style="font-size:18px; color:var(--text-brown);"><i class="far fa-comments"></i> みんなのコメント</h3>
           <div id="detail-comments" style="margin-bottom: 20px;"></div>
-
           <div style="background:#f9f9f9; padding:20px; border-radius:10px; border:2px solid #eee;">
             <h4 style="margin-top:0;">コメントを追加する</h4>
             <form onsubmit="submitComment(event)">
@@ -381,13 +228,11 @@
         <section class="hand-drawn-box" style="padding:30px; background:#fff;">
           <h2 class="section-title">口コミを書く</h2>
           <p style="margin-bottom:20px; font-size:14px;">あなたのおうち英語の体験が、他のパパママの助けになります。</p>
-
           <form onsubmit="submitReview(event)">
             <div class="form-group">
               <label class="form-label">お名前（ニックネーム）</label>
               <input type="text" id="input-username" class="form-input" placeholder="例：えいごママ" required>
             </div>
-
             <div class="form-group">
               <label class="form-label">カテゴリー</label>
               <select class="form-select" id="input-cat" onchange="updateFormFields()">
@@ -413,31 +258,22 @@
                 <option value="1">★☆☆☆☆ (1.0)</option>
               </select>
             </div>
-
             <div id="dynamic-form-fields"></div>
-
             <div class="form-group">
               <label class="form-label">良い点・お子様の反応</label>
               <div style="font-size:12px; color:#666; margin-bottom:5px; background:var(--sub-green); padding:8px; border-radius:5px;">
-                💡 <b>投稿のヒント</b><br>
-                ✔ お子様の年齢・使った期間<br>
-                ✔ 良かった点、できるようになったこと<br>
-                ✔ 微妙だった点、気になった点<br>
-                などを書くと、他のパパママの参考になります！
+                💡 <b>投稿のヒント</b><br>✔ お子様の年齢・使った期間<br>✔ 良かった点、できるようになったこと<br>✔ 微妙だった点、気になった点<br>などを書くと、他のパパママの参考になります！
               </div>
               <textarea id="input-good" class="form-textarea" rows="4" required placeholder="例：歌のリズムが良く、気付いたら子供が口ずさむようになりました！"></textarea>
             </div>
-
             <div class="form-group">
               <label class="form-label">関連URL (任意)</label>
               <input type="url" id="input-url" placeholder="https://..." class="form-input">
             </div>
-
             <div class="form-group">
-              <label class="form-label">写真 (任意 / 2MBまで)</label>
+              <label class="form-label">写真 (任意 / 1MBまで)</label>
               <input type="file" id="input-image" class="form-input" accept="image/*">
             </div>
-
             <div style="text-align:center;">
               <button type="submit" id="btn-submit-review" class="submit-btn">投稿する</button>
             </div>
@@ -471,7 +307,6 @@
         </section>
       </div>
 
-      <!-- 管理者専用画面（隠し） -->
       <div id="page-admin" class="page-section">
         <section class="hand-drawn-box" style="padding:30px; background:#fff;">
           <h2 class="section-title" style="background:var(--accent-pink); color:#fff;">管理画面</h2>
@@ -489,20 +324,17 @@
         <div id="ad-text-sidebar1" style="background:#fff; height:150px; line-height:150px; color:#ddd;">[ サイドバナー 上 ]</div>
         <img id="ad-img-sidebar1" src="" alt="広告">
       </a>
-
       <div class="p-search-box hand-drawn-box" style="padding:20px; text-align:left; margin-bottom: 20px;">
         <h2 class="section-title" style="font-size:16px; background:#fff; border:2px solid var(--accent-yellow);">人気ランキング</h2>
         <ul class="ranking-list" id="ranking-list-container">
           <li style="font-size:12px; color:#888;">読み込み中...</li>
         </ul>
       </div>
-
       <a id="ad-link-sidebar2" href="#" target="_blank" class="c-ad-area" style="padding:10px; margin-top:0; display:block;">
         <span class="c-ad-label">PR</span>
         <div id="ad-text-sidebar2" style="background:#fff; height:150px; line-height:150px; color:#ddd;">[ バナー 1 ]</div>
         <img id="ad-img-sidebar2" src="" alt="広告">
       </a>
-     
       <a id="ad-link-sidebar3" href="#" target="_blank" class="c-ad-area sp-hide-ad" style="padding:10px; margin-top:0; display:block;">
         <span class="c-ad-label">PR</span>
         <div id="ad-text-sidebar3" style="background:#fff; height:150px; line-height:150px; color:#ddd;">[ バナー 2 ]</div>
@@ -523,15 +355,15 @@
   </footer>
 
   <script type="module">
-    // 【修正箇所】 JavaScriptの仕様上、外部からのimport設定は必ず一番上に書く必要があります。
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
-    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, query, orderBy, limit, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, increment, query, orderBy, limit, serverTimestamp, where } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-storage.js";
 
-    // 広告設定
+    const ADMIN_PASSWORD = "admin123";
+
     const AD_BANNERS = {
-      spTop:    { imageUrl: "", linkUrl: "https://example.com" },
+      spTop: { imageUrl: "", linkUrl: "https://example.com" },
       category: { imageUrl: "", linkUrl: "https://example.com" },
       sidebar1: { imageUrl: "", linkUrl: "https://example.com" },
       sidebar2: { imageUrl: "", linkUrl: "https://example.com" },
@@ -539,17 +371,13 @@
     };
 
     function setupAds() {
-      for (const [key, data] of Object.entries(AD_BANNERS)) {
+      for (const[key, data] of Object.entries(AD_BANNERS)) {
         const linkEl = document.getElementById(`ad-link-${key}`);
         const imgEl = document.getElementById(`ad-img-${key}`);
         const textEl = document.getElementById(`ad-text-${key}`);
         if(linkEl && imgEl && textEl) {
           linkEl.href = data.linkUrl || "#";
-          if(data.imageUrl) {
-            imgEl.src = data.imageUrl;
-            imgEl.style.display = "block";
-            textEl.style.display = "none";
-          }
+          if(data.imageUrl) { imgEl.src = data.imageUrl; imgEl.style.display = "block"; textEl.style.display = "none"; }
         }
       }
     }
@@ -578,18 +406,23 @@
 
     const escapeHTML = (str) => {
       if (!str) return '';
-      return String(str).replace(/[&<>'"]/g, tag => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-      }[tag]));
+      return String(str).replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag]));
     };
 
+    function getScore(p) {
+      const s = p.stars || 0;
+      const c = p.commentCount || 0;
+      return (s * 2) + (c * 0.5);
+    }
+
+    // ★重要: 初期取得はエラー回避のため最もシンプルな「最新100件取得」のみにする
     async function initApp() {
       try {
-        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(30));
+        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
         const snap = await getDocs(q);
         recentReviewsCache =[];
-        snap.forEach(doc => {
-          recentReviewsCache.push({ id: doc.id, ...doc.data() });
+        snap.forEach(docSnap => {
+          recentReviewsCache.push({ id: docSnap.id, ...docSnap.data() });
         });
       } catch(e) {
         console.error("初期データ取得エラー:", e);
@@ -598,9 +431,7 @@
       }
     }
 
-    window.addEventListener('popstate', () => {
-      handleUrlParams();
-    });
+    window.addEventListener('popstate', () => { handleUrlParams(); });
 
     function handleUrlParams() {
       const params = new URLSearchParams(window.location.search);
@@ -609,46 +440,39 @@
       const cat = params.get('cat');
       const tag = params.get('tag');
 
-      if (id) {
-        showDetail(id, false); 
-      } else if (tag) {
-        searchByTag(tag, false);
-      } else if (page) {
-        router(page, cat, false);
-      } else {
-        router('home', null, false);
-      }
+      if (id) { showDetail(id, false); } 
+      else if (tag) { searchByTag(tag, false); } 
+      else if (page) { router(page, cat, false); } 
+      else { router('home', null, false); }
     }
 
     const ageItems =['0〜1歳', '2〜3歳', '4〜5歳', '小学生低学年', '小学生高学年', '中学生'];
     const FILTER_DATA = {
-      '動画・アニメ': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '学べる内容・スキル', colorClass: 'yellow', items:['アルファベット', '挨拶・自己紹介', '色・数字・動物', 'フォニックス', '日常会話', '歌・手遊び', 'その他'] }] },
-      'アプリ': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '料金体系', colorClass: 'green', items:['完全無料', '基本無料(課金あり)', '買い切り', '月額制'] }, { label: '学べる内容・スキル', colorClass: 'yellow', items:['アルファベット', 'フォニックス', '単語・スペル', 'リスニング', 'スピーキング(発音)', '英検・テスト対策', 'その他'] }] },
-      '絵本・本': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '種類', colorClass: 'green', items:['ボードブック', '仕掛け絵本', '図鑑', 'リーダーズ(多読)', '音声タッチペン', 'その他'] }, { label: '学べる内容・スキル', colorClass: 'yellow', items:['アルファベット', '挨拶・日常表現', '色・数字・動物', 'フォニックス', '長文読解(多読)', 'その他'] }] },
-      '通信・教室': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '学習スタイル', colorClass: 'green', items:['オンライン英会話', '通信教材(郵送)', 'アプリ学習メイン', '通学型教室', 'その他'] }, { label: '学べる内容・スキル', colorClass: 'yellow', items:['リスニング', 'スピーキング', 'リーディング', 'ライティング', '英検・テスト対策', '異文化理解', 'その他'] }] },
-      'イベント': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '開催形式', colorClass: 'green', items:['オンライン', '対面(国内)', '国内キャンプ', '海外留学', 'その他'] }, { label: '内容・目的', colorClass: 'yellow', items:['異文化交流', 'スピーキング実践', '歌・ダンス・工作', 'ハロウィン・クリスマス', 'その他'] }] },
-      'ワークシート': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '種類', colorClass: 'green', items:['無料ダウンロード', '市販ドリル', 'プリント', 'その他'] }, { label: '学べる内容・スキル', colorClass: 'yellow', items:['運筆・アルファベット', 'なぞり書き', '単語・スペル', 'フォニックス', '文法', '長文読解', 'その他'] }] }
+      '動画・アニメ': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '内容', colorClass: 'yellow', items:['アルファベット', 'フォニックス', '日常会話', '歌・手遊び'] }] },
+      'アプリ': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '内容', colorClass: 'yellow', items:['アルファベット', 'フォニックス', '単語・スペル', '英検・テスト対策'] }] },
+      '絵本・本': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '内容', colorClass: 'yellow', items:['アルファベット', 'フォニックス', '長文読解(多読)'] }] },
+      '通信・教室': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '内容', colorClass: 'yellow', items:['リスニング', 'スピーキング', 'リーディング', 'ライティング', '英検・テスト対策'] }] },
+      'イベント': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '内容', colorClass: 'yellow', items:['異文化交流', 'スピーキング実践', 'ハロウィン・クリスマス'] }] },
+      'ワークシート': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '内容', colorClass: 'yellow', items:['無料ダウンロード', '運筆・アルファベット', '単語・スペル', 'フォニックス'] }] }
     };
 
     function router(pageId, category = null, pushHistory = true) {
+      if (pageId === 'admin') {
+        const pass = prompt("管理パスワードを入力してください");
+        if (pass !== ADMIN_PASSWORD) { alert("アクセスできません"); return; }
+      }
+
       document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
       const targetPage = document.getElementById('page-' + pageId);
       if(targetPage) targetPage.classList.add('active');
       window.scrollTo(0, 0);
 
       document.querySelectorAll('.l-nav__item a').forEach(a => a.classList.remove('active'));
-      if(category && category !== 'all') {
-        document.getElementById('nav-' + category)?.classList.add('active');
-      } else if(pageId === 'contact') {
-        document.getElementById('nav-contact')?.classList.add('active');
-      }
-
+      if(category && category !== 'all') { document.getElementById('nav-' + category)?.classList.add('active'); } 
+      
       const sidebar = document.getElementById('sidebar');
-      if (pageId === 'contact' || pageId === 'privacy' || pageId === 'admin') {
-        sidebar.style.display = 'none';
-      } else {
-        sidebar.style.display = 'block';
-      }
+      if (pageId === 'contact' || pageId === 'privacy' || pageId === 'admin') { sidebar.style.display = 'none'; } 
+      else { sidebar.style.display = 'block'; }
 
       let title = "ミライルーツ | 子供向け英語教育 口コミ総合サイト";
       let url = "?page=" + pageId;
@@ -656,10 +480,7 @@
       if (pageId === 'category') {
         currentCategory = category || 'all';
         setupCategoryPage(currentCategory);
-        if (currentCategory !== 'all') {
-          title = `${currentCategory}の口コミ一覧 | ミライルーツ`;
-          url += "&cat=" + encodeURIComponent(currentCategory);
-        }
+        if (currentCategory !== 'all') { title = `${currentCategory}の口コミ一覧 | ミライルーツ`; url += "&cat=" + encodeURIComponent(currentCategory); }
       } else if (pageId === 'home') {
         renderHomeReviews();
         renderRanking();
@@ -676,9 +497,7 @@
       }
 
       document.title = title;
-      if (pushHistory && pageId !== 'detail') {
-        history.pushState(null, title, url);
-      }
+      if (pushHistory && pageId !== 'detail') { history.pushState(null, title, url); }
     }
 
     function renderHomeReviews() {
@@ -687,10 +506,10 @@
         document.getElementById('home-reviews-popular').innerHTML = '';
         return;
       }
-      const newReviews =[...recentReviewsCache].slice(0, 6);
+      const newReviews = [...recentReviewsCache].slice(0, 6);
       document.getElementById('home-reviews-new').innerHTML = newReviews.map(p => createCardHtml(p)).join('');
 
-      const popReviews =[...recentReviewsCache].sort((a,b) => (b.stars||0) - (a.stars||0)).slice(0, 6);
+      const popReviews = [...recentReviewsCache].sort((a,b) => getScore(b) - getScore(a)).slice(0, 6);
       document.getElementById('home-reviews-popular').innerHTML = popReviews.map(p => createCardHtml(p)).join('');
     }
 
@@ -698,7 +517,7 @@
       const container = document.getElementById('ranking-list-container');
       if(recentReviewsCache.length === 0) return;
      
-      const popReviews = [...recentReviewsCache].sort((a,b) => (b.stars||0) - (a.stars||0)).slice(0, 3);
+      const popReviews = [...recentReviewsCache].sort((a,b) => getScore(b) - getScore(a)).slice(0, 3);
       container.innerHTML = popReviews.map((r, index) => `
         <li onclick="showDetail('${r.id}')" style="cursor:pointer;">
           <span class="rank-num ${index === 0 ? 'top' : ''}">${index + 1}</span>
@@ -710,40 +529,26 @@
       `).join('');
     }
 
-    async function searchByKeyword() {
+    function searchByKeyword() {
       const kw = document.getElementById('keyword-search-input').value.trim().toLowerCase();
       if(!kw) return;
-      
       currentCategory = 'all';
       router('category', 'all', false);
       document.getElementById('cat-title').innerText = `「${kw}」の検索結果`;
       document.getElementById('search-filters').innerHTML = '';
       document.getElementById('cat-result-title').innerText = '検索結果';
 
-      try {
-        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
-        const snap = await getDocs(q);
-        
-        const results =[];
-        snap.forEach(doc => {
-          const d = doc.data();
-          const title = d.title ? d.title.toLowerCase() : '';
-          const goodPoint = d.goodPoint ? d.goodPoint.toLowerCase() : '';
-          if(title.includes(kw) || goodPoint.includes(kw)) {
-            results.push({id: doc.id, ...d});
-          }
-        });
-        currentFilteredResults = results;
-      } catch (e) {
-        console.error("検索エラー:", e);
-        currentFilteredResults =[];
-      }
-      
+      const results = recentReviewsCache.filter(d => {
+        const t = d.title ? d.title.toLowerCase() : '';
+        const g = d.goodPoint ? d.goodPoint.toLowerCase() : '';
+        return t.includes(kw) || g.includes(kw);
+      });
+      currentFilteredResults = results;
       currentPage = 1;
       renderPaginatedResults();
     }
 
-    async function searchByTag(tag, pushHistory = true) {
+    function searchByTag(tag, pushHistory = true) {
       currentCategory = 'all';
       router('category', 'all', false);
       document.getElementById('cat-title').innerText = tag + ' の教材・情報';
@@ -752,30 +557,17 @@
 
       const title = `${tag}の口コミ・情報 | ミライルーツ`;
       document.title = title;
-      if (pushHistory) {
-        history.pushState(null, title, `?page=category&tag=${encodeURIComponent(tag)}`);
-      }
+      if (pushHistory) { history.pushState(null, title, `?page=category&tag=${encodeURIComponent(tag)}`); }
 
-      try {
-        const q = query(collection(db, "reviews"), where("tags", "array-contains", tag), orderBy("createdAt", "desc"), limit(100));
-        const snap = await getDocs(q);
-        const results =[];
-        snap.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
-        currentFilteredResults = results;
-      } catch (e) {
-        console.error("タグ検索エラー:", e);
-        currentFilteredResults =[];
-      }
-      
+      currentFilteredResults = recentReviewsCache.filter(d => d.tags && d.tags.includes(tag));
       currentPage = 1;
       renderPaginatedResults();
     }
 
-    async function setupCategoryPage(cat) {
+    function setupCategoryPage(cat) {
       currentPage = 1;
       const filterContainer = document.getElementById('search-filters');
       const headerBox = document.getElementById('category-search-header');
-      document.getElementById('cat-results').innerHTML = '<p style="text-align:center; width:100%;">データを取得中...</p>';
 
       if (cat === 'all') {
         headerBox.style.display = 'none';
@@ -800,57 +592,27 @@
         filterContainer.innerHTML = html;
       }
 
-      try {
-        let q;
-        if (cat === 'all') {
-          q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
-        } else {
-          q = query(collection(db, "reviews"), where("cat", "==", cat), orderBy("createdAt", "desc"), limit(100));
-        }
-
-        const snap = await getDocs(q);
-        const results =[];
-        snap.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
-        currentFilteredResults = results;
-      } catch (e) {
-        console.error("カテゴリ一覧取得エラー:", e);
-        currentFilteredResults =[];
-      }
+      if (cat === 'all') { currentFilteredResults = [...recentReviewsCache]; } 
+      else { currentFilteredResults = recentReviewsCache.filter(d => d.cat === cat); }
       
       renderPaginatedResults();
     }
 
     function toggleTag(el) { el.classList.toggle('active'); }
 
-    async function applyFilterSearch() {
+    function applyFilterSearch() {
       const activeTags = Array.from(document.querySelectorAll('#search-filters .tag.active')).map(el => el.innerText);
-
-      try {
-        let q;
-        if (currentCategory !== 'all') {
-          q = query(collection(db, "reviews"), where("cat", "==", currentCategory), orderBy("createdAt", "desc"), limit(100));
-        } else {
-          q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
+      let results = currentCategory !== 'all' ? recentReviewsCache.filter(d => d.cat === currentCategory) : [...recentReviewsCache];
+      
+      results = results.filter(d => {
+        if (activeTags.length > 0) {
+          if(!d.tags) return false;
+          return activeTags.some(t => d.tags.includes(t));
         }
+        return true;
+      });
 
-        const snap = await getDocs(q);
-        let results =[];
-        snap.forEach(doc => {
-          const d = doc.data();
-          let isMatch = true;
-          if (activeTags.length > 0) {
-            if(!d.tags) isMatch = false;
-            else isMatch = activeTags.some(t => d.tags.includes(t));
-          }
-          if(isMatch) results.push({ id: doc.id, ...d });
-        });
-
-        currentFilteredResults = results;
-      } catch (e) {
-        console.error("絞り込みエラー:", e);
-        currentFilteredResults =[];
-      }
-
+      currentFilteredResults = results;
       document.getElementById('cat-result-title').innerText = '検索結果';
       currentPage = 1;
       renderPaginatedResults();
@@ -883,22 +645,17 @@
       }
     }
 
-    function goToPage(p) {
-      currentPage = p;
-      renderPaginatedResults();
-      window.scrollTo(0, 0);
-    }
+    function goToPage(p) { currentPage = p; renderPaginatedResults(); window.scrollTo(0, 0); }
 
     function createCardHtml(p) {
       let stars = '';
       const starCount = p.stars || 0;
       for(let i=0; i<5; i++) stars += (i < starCount) ? '★' : '☆';
+      const commentsCount = p.commentCount || 0;
       const displayTags = (p.tags && p.tags.length > 0) ? p.tags.slice(0, 3).map(t => escapeHTML(t)).join(' / ') : '';
-     
       const colorHex = p.color ? p.color.replace('#','') : '888888';
       const catColor = p.color || '#888';
       const imgSrc = p.img || `https://placehold.jp/${colorHex}/ffffff/300x200.png?text=No+Image`;
-      
       const uName = p.userName ? escapeHTML(p.userName) : 'ゲストユーザー';
 
       return `
@@ -909,7 +666,11 @@
           </div>
           <div class="c-card__body">
             <h3 class="c-card__title">${escapeHTML(p.title || '無題')}</h3>
-            <div class="c-rating">${stars} <span style="color:#888; font-size:11px; margin-left:5px;"><i class="fas fa-user-circle"></i> ${uName}</span></div>
+            <div class="c-rating">
+              ${stars} 
+              <span style="color:#888; font-size:11px; margin-left:5px;"><i class="fas fa-comment"></i> ${commentsCount}</span>
+              <span style="color:#888; font-size:11px; margin-left:5px;"><i class="fas fa-user-circle"></i> ${uName}</span>
+            </div>
             <div style="font-size:12px; color:#888; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
               <i class="fas fa-tag"></i> ${displayTags}
             </div>
@@ -924,26 +685,11 @@
       document.getElementById('detail-comments').innerHTML = '';
 
       let item = recentReviewsCache.find(r => r.id === id);
-      if(!item) {
-        try {
-          const docRef = doc(db, "reviews", id);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            item = { id: docSnap.id, ...docSnap.data() };
-          } else {
-            router('home'); return;
-          }
-        } catch(e) {
-          console.error("詳細取得エラー", e);
-          router('home'); return;
-        }
-      }
+      if(!item) { router('home'); return; }
 
       const title = `${escapeHTML(item.title || '無題')}の口コミ・評判｜子供英語教材レビュー | ミライルーツ`;
       document.title = title;
-      if (pushHistory) {
-        history.pushState(null, title, `?id=${id}`);
-      }
+      if (pushHistory) { history.pushState(null, title, `?id=${id}`); }
 
       let stars = '';
       const starCount = item.stars || 0;
@@ -955,8 +701,7 @@
           <div style="margin-top:20px; padding:15px; border: 2px dashed var(--main-green); border-radius: 10px; background: #fff;">
             <span style="font-weight:bold; color:var(--text-brown);"><i class="fas fa-link"></i> 公式サイト・参考URL：</span><br>
             <a href="${escapeHTML(item.url)}" target="_blank" style="color:var(--main-green); text-decoration:underline; word-break: break-all;">${escapeHTML(item.url)}</a>
-          </div>
-        `;
+          </div>`;
       }
 
       const colorHex = item.color ? item.color.replace('#','') : '888888';
@@ -964,7 +709,6 @@
       const imgSrc = item.img || `https://placehold.jp/${colorHex}/ffffff/300x200.png?text=No+Image`;
       const tagsHtml = item.tags ? item.tags.map(t => `<span class="tag" style="cursor:default;">${escapeHTML(t)}</span>`).join('') : '';
       const uName = item.userName ? escapeHTML(item.userName) : 'ゲストユーザー';
-
       const shareUrl = encodeURIComponent(location.href);
       const shareText = encodeURIComponent((item.title || '口コミ記事') + ' | ミライルーツ');
 
@@ -974,32 +718,28 @@
         <div style="font-size:13px; color:#666; margin-bottom:10px;"><i class="fas fa-user-circle"></i> ${uName} さんの口コミ</div>
         <div class="c-rating" style="font-size:18px; margin-bottom:15px;">${stars}</div>
         <img src="${imgSrc}" style="width:100%; max-width:500px; border-radius:10px; border:2px solid #ddd; margin-bottom:20px;">
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
-          ${tagsHtml}
-        </div>
-
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">${tagsHtml}</div>
         <div style="background:var(--bg-cream); padding:20px; border-radius:10px; border:1px solid #eee;">
           <h4 style="margin-top:0; color:var(--text-brown);">良い点・おすすめポイント</h4>
           <p style="white-space: pre-wrap;">${escapeHTML(item.goodPoint || '')}</p>
         </div>
-
         ${urlDisplay}
-
-        <!-- シェアボタン -->
         <div style="margin-top:20px; display:flex; gap:10px; align-items:center;">
-          <span style="font-size:14px; font-weight:bold; color:var(--text-brown);">シェアする：</span>
+          <span style="font-size:14px; font-weight:bold; color:var(--text-brown);">シェア：</span>
           <a href="https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}" target="_blank" style="background:#1DA1F2; color:#fff; padding:5px 10px; border-radius:5px; font-size:14px;"><i class="fab fa-twitter"></i> X</a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" style="background:#1877F2; color:#fff; padding:5px 10px; border-radius:5px; font-size:14px;"><i class="fab fa-facebook-f"></i> Facebook</a>
-          <a href="https://social-plugins.line.me/lineit/share?url=${shareUrl}" target="_blank" style="background:#06C755; color:#fff; padding:5px 10px; border-radius:5px; font-size:14px;"><i class="fab fa-line"></i> LINE</a>
-        </div>
-      `;
+        </div>`;
      
       try {
-        const commentsQuery = query(collection(db, "comments"), where("itemId", "==", currentDetailId), orderBy("createdAt", "asc"));
+        // ★重要: エラーを確実に回避するため、where のみの単純検索にしてブラウザでソートする
+        const commentsQuery = query(collection(db, "comments"), where("itemId", "==", currentDetailId));
         const cSnap = await getDocs(commentsQuery);
         const comments =[];
         cSnap.forEach(doc => comments.push(doc.data()));
+        comments.sort((a,b) => {
+          const tA = a.createdAt ? a.createdAt.toMillis() : 0;
+          const tB = b.createdAt ? b.createdAt.toMillis() : 0;
+          return tA - tB;
+        });
         renderComments(comments);
       } catch (e) {
         console.error("コメント取得エラー", e);
@@ -1020,24 +760,18 @@
             <div class="comment-box">
               <div class="comment-header"><span><i class="fas fa-user-circle"></i> ${escapeHTML(c.user || 'ゲスト')}</span> <span style="color:#f39c12;">${s}</span></div>
               <p style="margin:0; font-size:14px; white-space:pre-wrap;">${escapeHTML(c.text || '')}</p>
-            </div>
-          `;
+            </div>`;
         }).join('');
       }
     }
 
     async function submitComment(e) {
       e.preventDefault();
-
       const lastPost = localStorage.getItem("lastCommentTime");
-      if (lastPost && Date.now() - parseInt(lastPost) < 60000) {
-        alert("連続投稿はできません。1分以上間隔を空けてください。");
-        return;
-      }
+      if (lastPost && Date.now() - parseInt(lastPost) < 60000) { alert("1分以上間隔を空けてください。"); return; }
 
       const btn = document.getElementById('btn-submit-comment');
-      btn.disabled = true;
-      btn.innerText = "送信中...";
+      btn.disabled = true; btn.innerText = "送信中...";
 
       try {
         const star = parseInt(document.getElementById('comment-star').value);
@@ -1045,26 +779,21 @@
         const userName = document.getElementById('comment-name').value || 'ゲストユーザー';
 
         await addDoc(collection(db, "comments"), {
-          itemId: currentDetailId,
-          user: userName,
-          star: star,
-          text: text,
-          createdAt: serverTimestamp()
+          itemId: currentDetailId, user: userName, star: star, text: text, createdAt: serverTimestamp()
         });
 
-        localStorage.setItem("lastCommentTime", Date.now().toString());
+        // カスタムドキュメントIDがない場合はキャッシュ上でだけ更新して見た目を調整する安全策
+        const cacheItem = recentReviewsCache.find(r => r.id === currentDetailId);
+        if (cacheItem) { cacheItem.commentCount = (cacheItem.commentCount || 0) + 1; }
 
+        localStorage.setItem("lastCommentTime", Date.now().toString());
         document.getElementById('comment-text').value = '';
         document.getElementById('comment-name').value = '';
-        
         showDetail(currentDetailId, false);
-
       } catch (error) {
-        console.error("コメント投稿エラー:", error);
         alert("エラーが発生しました。");
       } finally {
-        btn.disabled = false;
-        btn.innerText = "投稿する";
+        btn.disabled = false; btn.innerText = "投稿する";
       }
     }
 
@@ -1072,7 +801,6 @@
       const cat = document.getElementById('input-cat').value;
       const container = document.getElementById('dynamic-form-fields');
       let html = '';
-
       if(FILTER_DATA[cat]){
         FILTER_DATA[cat].groups.forEach((group, index) => {
           html += `
@@ -1081,8 +809,7 @@
               <div class="checkbox-wrap" id="form-group-tags-${index}">
                 ${group.items.map(item => `<label><input type="checkbox" value="${item}"> ${item}</label>`).join('')}
               </div>
-            </div>
-          `;
+            </div>`;
         });
       }
       container.innerHTML = html;
@@ -1090,16 +817,11 @@
 
     async function submitReview(e) {
       e.preventDefault();
-
       const lastPost = localStorage.getItem("lastReviewTime");
-      if (lastPost && Date.now() - parseInt(lastPost) < 60000) {
-        alert("連続投稿はできません。1分以上間隔を空けてください。");
-        return;
-      }
+      if (lastPost && Date.now() - parseInt(lastPost) < 60000) { alert("1分以上間隔を空けてください。"); return; }
 
       const btn = document.getElementById('btn-submit-review');
-      btn.disabled = true;
-      btn.innerText = "送信中...";
+      btn.disabled = true; btn.innerText = "送信中...";
 
       try {
         const userName = document.getElementById('input-username').value;
@@ -1110,20 +832,14 @@
         const goodPoint = document.getElementById('input-good').value;
 
         let tags =[];
-        const checkboxes = document.querySelectorAll('#dynamic-form-fields input[type="checkbox"]:checked');
-        checkboxes.forEach(cb => tags.push(cb.value));
+        document.querySelectorAll('#dynamic-form-fields input[type="checkbox"]:checked').forEach(cb => tags.push(cb.value));
 
         const fileInput = document.getElementById('input-image');
         const file = fileInput.files[0];
         let imageUrl = '';
 
         if (file) {
-          if (file.size > 2 * 1024 * 1024) { 
-            alert("画像のサイズは2MB以下にしてください。");
-            btn.disabled = false;
-            btn.innerText = "投稿する";
-            return;
-          }
+          if (file.size > 1 * 1024 * 1024) { alert("1MB以下にしてください。"); btn.disabled = false; btn.innerText = "投稿する"; return; }
           const fileName = `images/${Date.now()}_${Math.random().toString(36).substring(2, 8)}_${file.name}`;
           const storageRef = ref(storage, fileName);
           await uploadBytes(storageRef, file);
@@ -1131,36 +847,22 @@
         }
 
         await addDoc(collection(db, "reviews"), {
-          userName: userName,
-          cat: cat,
-          title: title,
-          stars: stars,
-          goodPoint: goodPoint,
-          url: url,
-          tags: tags,
-          img: imageUrl,
-          color: getColorForCat(cat),
-          createdAt: serverTimestamp()
+          userName: userName, cat: cat, title: title, stars: stars, goodPoint: goodPoint, url: url, tags: tags, img: imageUrl, color: getColorForCat(cat), commentCount: 0, createdAt: serverTimestamp()
         });
 
         localStorage.setItem("lastReviewTime", Date.now().toString());
-
         alert('投稿ありがとうございます！');
         document.getElementById('input-username').value = '';
         document.getElementById('input-title').value = '';
         document.getElementById('input-good').value = '';
         document.getElementById('input-url').value = '';
         document.getElementById('input-image').value = '';
-        checkboxes.forEach(cb => cb.checked = false);
-       
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => cb.checked = false);
         await initApp();
-
       } catch (error) {
-        console.error("投稿エラー: ", error);
         alert('エラーが発生しました。設定を確認してください。');
       } finally {
-        btn.disabled = false;
-        btn.innerText = "投稿する";
+        btn.disabled = false; btn.innerText = "投稿する";
       }
     }
 
@@ -1178,8 +880,7 @@
       try {
         const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(50));
         const snap = await getDocs(q);
-        let html = '<table style="width:100%; border-collapse:collapse; font-size:14px; text-align:left;">';
-        html += '<tr style="background:#eee;"><th style="padding:8px;">タイトル</th><th style="padding:8px;">ユーザー</th><th style="padding:8px; text-align:center;">アクション</th></tr>';
+        let html = '<table style="width:100%; border-collapse:collapse; font-size:14px; text-align:left;"><tr style="background:#eee;"><th style="padding:8px;">タイトル</th><th style="padding:8px;">ユーザー</th><th style="padding:8px; text-align:center;">アクション</th></tr>';
         snap.forEach(docSnap => {
           const d = docSnap.data();
           html += `<tr style="border-bottom:1px solid #ccc;">
@@ -1190,9 +891,7 @@
         });
         html += '</table>';
         document.getElementById('admin-review-list').innerHTML = html;
-      } catch (e) {
-        console.error("管理データ取得エラー", e);
-      }
+      } catch (e) { console.error("管理データ取得エラー", e); }
     }
 
     async function deleteReview(id) {
@@ -1202,12 +901,10 @@
         alert("削除しました。");
         loadAdminReviews();
         initApp();
-      } catch(e) {
-        alert("削除に失敗しました。ルールの権限を確認してください。");
-      }
+      } catch(e) { alert("削除に失敗しました。"); }
     }
 
-    // 【修正箇所】 ボタンの動作を保証するための設定を一番最後に配置しました
+    // 必ず最下部で関数をグローバルに登録する
     window.router = router;
     window.searchByKeyword = searchByKeyword;
     window.searchByTag = searchByTag;
@@ -1221,11 +918,10 @@
     window.loadAdminReviews = loadAdminReviews;
     window.deleteReview = deleteReview;
 
-    // --- 初期化処理 ---
+    // 初期化実行
     setupAds();
     updateFormFields();
     initApp();
-
   </script>
 </body>
 </html>
