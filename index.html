@@ -256,6 +256,15 @@
           <div style="margin-bottom: 20px;">
             <h2 class="section-title">条件から探す</h2>
           </div>
+
+          <!-- キーワード検索の追加 -->
+          <div style="margin-bottom: 25px;">
+            <div class="filter-sub-title" style="margin-top:0;"><i class="fas fa-search"></i> キーワード検索</div>
+            <div style="display:flex; justify-content:center; gap:10px;">
+              <input type="text" id="keyword-search-input" class="form-input" style="width:70%; max-width:300px;" placeholder="教材名などを入力...">
+              <button type="button" onclick="searchByKeyword()" class="header-btn" style="border-radius:8px;">検索</button>
+            </div>
+          </div>
          
           <div style="margin-bottom: 25px;">
             <div class="filter-sub-title" style="margin-top:0;"><i class="fas fa-child"></i> お子様の年齢</div>
@@ -314,7 +323,7 @@
         <section class="p-search-box hand-drawn-box" id="category-search-header">
           <h2 id="cat-title" class="section-title">カテゴリー検索</h2>
           <div id="search-filters" style="text-align:center; margin-top:10px;"></div>
-          <button onclick="applyFilterSearch()" class="header-btn" style="margin-top:30px;">この条件で絞り込む</button>
+          <button type="button" onclick="applyFilterSearch()" class="header-btn" style="margin-top:30px;">この条件で絞り込む</button>
         </section>
 
         <a id="ad-link-category" href="#" target="_blank" class="c-ad-area" style="padding:10px; margin-bottom:40px; display:block;">
@@ -325,14 +334,16 @@
 
         <section>
           <h2 id="cat-result-title" class="section-title" style="background:var(--sub-green);">新着一覧</h2>
-          <div id="cat-results" class="c-card-grid"></div>
+          <div id="cat-results" class="c-card-grid">
+            <p style="text-align:center; width:100%;">データを取得中...</p>
+          </div>
           <div id="pagination" class="pagination"></div>
         </section>
       </div>
 
       <div id="page-detail" class="page-section">
         <section class="hand-drawn-box" style="padding:30px; background:#fff;">
-          <button onclick="history.back()" style="background:none; border:none; color:var(--main-green); cursor:pointer; font-weight:bold; margin-bottom:15px;">&lt; 戻る</button>
+          <button type="button" onclick="history.back()" style="background:none; border:none; color:var(--main-green); cursor:pointer; font-weight:bold; margin-bottom:15px;">&lt; 戻る</button>
           <div id="detail-content"></div>
 
           <hr style="border:1px dashed #ccc; margin:30px 0;">
@@ -372,7 +383,6 @@
           <p style="margin-bottom:20px; font-size:14px;">あなたのおうち英語の体験が、他のパパママの助けになります。</p>
 
           <form onsubmit="submitReview(event)">
-            <!-- お名前の追加 -->
             <div class="form-group">
               <label class="form-label">お名前（ニックネーム）</label>
               <input type="text" id="input-username" class="form-input" placeholder="例：えいごママ" required>
@@ -408,7 +418,14 @@
 
             <div class="form-group">
               <label class="form-label">良い点・お子様の反応</label>
-              <textarea id="input-good" class="form-textarea" rows="3" required placeholder="例：歌のリズムが良く、気付いたら子供が口ずさむようになりました！"></textarea>
+              <div style="font-size:12px; color:#666; margin-bottom:5px; background:var(--sub-green); padding:8px; border-radius:5px;">
+                💡 <b>投稿のヒント</b><br>
+                ✔ お子様の年齢・使った期間<br>
+                ✔ 良かった点、できるようになったこと<br>
+                ✔ 微妙だった点、気になった点<br>
+                などを書くと、他のパパママの参考になります！
+              </div>
+              <textarea id="input-good" class="form-textarea" rows="4" required placeholder="例：歌のリズムが良く、気付いたら子供が口ずさむようになりました！"></textarea>
             </div>
 
             <div class="form-group">
@@ -416,9 +433,8 @@
               <input type="url" id="input-url" placeholder="https://..." class="form-input">
             </div>
 
-            <!-- 画像アップロードの追加 -->
             <div class="form-group">
-              <label class="form-label">写真 (任意)</label>
+              <label class="form-label">写真 (任意 / 2MBまで)</label>
               <input type="file" id="input-image" class="form-input" accept="image/*">
             </div>
 
@@ -455,6 +471,16 @@
         </section>
       </div>
 
+      <!-- 管理者専用画面（隠し） -->
+      <div id="page-admin" class="page-section">
+        <section class="hand-drawn-box" style="padding:30px; background:#fff;">
+          <h2 class="section-title" style="background:var(--accent-pink); color:#fff;">管理画面</h2>
+          <p>最新の投稿一覧（不正な投稿を削除できます）</p>
+          <button type="button" onclick="loadAdminReviews()" class="submit-btn" style="padding:5px 15px; font-size:14px; margin-bottom:20px;">最新データを読み込む</button>
+          <div id="admin-review-list" style="overflow-x:auto;"></div>
+        </section>
+      </div>
+
     </main>
 
     <aside class="l-sidebar" id="sidebar">
@@ -467,7 +493,8 @@
       <div class="p-search-box hand-drawn-box" style="padding:20px; text-align:left; margin-bottom: 20px;">
         <h2 class="section-title" style="font-size:16px; background:#fff; border:2px solid var(--accent-yellow);">人気ランキング</h2>
         <ul class="ranking-list" id="ranking-list-container">
-          </ul>
+          <li style="font-size:12px; color:#888;">読み込み中...</li>
+        </ul>
       </div>
 
       <a id="ad-link-sidebar2" href="#" target="_blank" class="c-ad-area" style="padding:10px; margin-top:0; display:block;">
@@ -496,12 +523,13 @@
   </footer>
 
   <script type="module">
+    // 【修正箇所】 JavaScriptの仕様上、外部からのimport設定は必ず一番上に書く必要があります。
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, where } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, getDoc, doc, deleteDoc, query, orderBy, limit, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-storage.js";
 
-    // 1. 広告バナー設定
+    // 広告設定
     const AD_BANNERS = {
       spTop:    { imageUrl: "", linkUrl: "https://example.com" },
       category: { imageUrl: "", linkUrl: "https://example.com" },
@@ -526,7 +554,6 @@
       }
     }
 
-    // 2. Firebase設定
     const firebaseConfig = {
       apiKey: "AIzaSyAxLazqxDkAKw1tKte2bTTD132-IeTG18k",
       authDomain: "miraitootsenglish.firebaseapp.com",
@@ -540,43 +567,36 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const db = getFirestore(app);
-    const storage = getStorage(app); // Storageを初期化
+    const storage = getStorage(app);
 
-    // 3. データの状態管理
-    let reviews = [];
+    let recentReviewsCache =[];
     let currentCategory = '';
     let currentFilteredResults =[];
     let currentPage = 1;
     const ITEMS_PER_PAGE = 20;
     let currentDetailId = null;
-    let isInitialLoad = true;
 
     const escapeHTML = (str) => {
       if (!str) return '';
-      return str.replace(/[&<>'"]/g, tag => ({
+      return String(str).replace(/[&<>'"]/g, tag => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
       }[tag]));
     };
 
-    // 4. Firestoreとの通信処理 (リアルタイム監視)
-    const reviewsQuery = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
-    onSnapshot(reviewsQuery, (snapshot) => {
-      reviews =[];
-      snapshot.forEach((doc) => {
-        reviews.push({ id: doc.id, ...doc.data() });
-      });
-     
-      if (isInitialLoad) {
-        isInitialLoad = false;
+    async function initApp() {
+      try {
+        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(30));
+        const snap = await getDocs(q);
+        recentReviewsCache =[];
+        snap.forEach(doc => {
+          recentReviewsCache.push({ id: doc.id, ...doc.data() });
+        });
+      } catch(e) {
+        console.error("初期データ取得エラー:", e);
+      } finally {
         handleUrlParams();
-      } else {
-        renderHomeReviews();
-        renderRanking();
-        if (document.getElementById('page-category').classList.contains('active')) {
-          applyFilterSearch();
-        }
       }
-    });
+    }
 
     window.addEventListener('popstate', () => {
       handleUrlParams();
@@ -600,7 +620,6 @@
       }
     }
 
-    // 5. アプリケーションの動作ロジック
     const ageItems =['0〜1歳', '2〜3歳', '4〜5歳', '小学生低学年', '小学生高学年', '中学生'];
     const FILTER_DATA = {
       '動画・アニメ': { groups:[{ label: '対象年齢', colorClass: 'pink', items: ageItems }, { label: '学べる内容・スキル', colorClass: 'yellow', items:['アルファベット', '挨拶・自己紹介', '色・数字・動物', 'フォニックス', '日常会話', '歌・手遊び', 'その他'] }] },
@@ -625,7 +644,7 @@
       }
 
       const sidebar = document.getElementById('sidebar');
-      if (pageId === 'contact' || pageId === 'privacy') {
+      if (pageId === 'contact' || pageId === 'privacy' || pageId === 'admin') {
         sidebar.style.display = 'none';
       } else {
         sidebar.style.display = 'block';
@@ -651,6 +670,9 @@
         title = "お問い合わせ | ミライルーツ";
       } else if (pageId === 'privacy') {
         title = "プライバシーポリシー | ミライルーツ";
+      } else if (pageId === 'admin') {
+        title = "管理画面 | ミライルーツ";
+        loadAdminReviews();
       }
 
       document.title = title;
@@ -660,43 +682,73 @@
     }
 
     function renderHomeReviews() {
-      if(reviews.length === 0) {
-        document.getElementById('home-reviews-new').innerHTML = '<p style="text-align:center; width:100%;">まだ投稿がありません。最初の口コミを投稿してみましょう！</p>';
+      if(recentReviewsCache.length === 0) {
+        document.getElementById('home-reviews-new').innerHTML = '<p style="text-align:center; width:100%;">まだ投稿がありません。</p>';
         document.getElementById('home-reviews-popular').innerHTML = '';
         return;
       }
-
-      const newReviews = [...reviews].slice(0, 6);
+      const newReviews =[...recentReviewsCache].slice(0, 6);
       document.getElementById('home-reviews-new').innerHTML = newReviews.map(p => createCardHtml(p)).join('');
 
-      const popReviews = [...reviews].sort((a,b) => b.stars - a.stars).slice(0, 6);
+      const popReviews =[...recentReviewsCache].sort((a,b) => (b.stars||0) - (a.stars||0)).slice(0, 6);
       document.getElementById('home-reviews-popular').innerHTML = popReviews.map(p => createCardHtml(p)).join('');
     }
 
     function renderRanking() {
       const container = document.getElementById('ranking-list-container');
-      if(reviews.length === 0) {
-        container.innerHTML = '<li><span style="font-size:12px; color:#888;">データがありません</span></li>';
-        return;
-      }
+      if(recentReviewsCache.length === 0) return;
      
-      const popReviews = [...reviews].sort((a,b) => b.stars - a.stars).slice(0, 3);
+      const popReviews = [...recentReviewsCache].sort((a,b) => (b.stars||0) - (a.stars||0)).slice(0, 3);
       container.innerHTML = popReviews.map((r, index) => `
         <li onclick="showDetail('${r.id}')" style="cursor:pointer;">
           <span class="rank-num ${index === 0 ? 'top' : ''}">${index + 1}</span>
           <div>
-            <div style="font-weight:bold; font-size:14px;">${escapeHTML(r.title)}</div>
-            <div style="font-size:11px; color:#888;">${escapeHTML(r.cat)} / ★${r.stars}.0</div>
+            <div style="font-weight:bold; font-size:14px;">${escapeHTML(r.title || '無題')}</div>
+            <div style="font-size:11px; color:#888;">${escapeHTML(r.cat || 'その他')} / ★${r.stars || 0}.0</div>
           </div>
         </li>
       `).join('');
     }
 
-    function searchByTag(tag, pushHistory = true) {
+    async function searchByKeyword() {
+      const kw = document.getElementById('keyword-search-input').value.trim().toLowerCase();
+      if(!kw) return;
+      
+      currentCategory = 'all';
+      router('category', 'all', false);
+      document.getElementById('cat-title').innerText = `「${kw}」の検索結果`;
+      document.getElementById('search-filters').innerHTML = '';
+      document.getElementById('cat-result-title').innerText = '検索結果';
+
+      try {
+        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
+        const snap = await getDocs(q);
+        
+        const results =[];
+        snap.forEach(doc => {
+          const d = doc.data();
+          const title = d.title ? d.title.toLowerCase() : '';
+          const goodPoint = d.goodPoint ? d.goodPoint.toLowerCase() : '';
+          if(title.includes(kw) || goodPoint.includes(kw)) {
+            results.push({id: doc.id, ...d});
+          }
+        });
+        currentFilteredResults = results;
+      } catch (e) {
+        console.error("検索エラー:", e);
+        currentFilteredResults =[];
+      }
+      
+      currentPage = 1;
+      renderPaginatedResults();
+    }
+
+    async function searchByTag(tag, pushHistory = true) {
       currentCategory = 'all';
       router('category', 'all', false);
       document.getElementById('cat-title').innerText = tag + ' の教材・情報';
       document.getElementById('search-filters').innerHTML = '';
+      document.getElementById('cat-result-title').innerText = '検索結果';
 
       const title = `${tag}の口コミ・情報 | ミライルーツ`;
       document.title = title;
@@ -704,22 +756,34 @@
         history.pushState(null, title, `?page=category&tag=${encodeURIComponent(tag)}`);
       }
 
-      currentFilteredResults = reviews.filter(p => p.tags && p.tags.includes(tag));
+      try {
+        const q = query(collection(db, "reviews"), where("tags", "array-contains", tag), orderBy("createdAt", "desc"), limit(100));
+        const snap = await getDocs(q);
+        const results =[];
+        snap.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
+        currentFilteredResults = results;
+      } catch (e) {
+        console.error("タグ検索エラー:", e);
+        currentFilteredResults =[];
+      }
+      
       currentPage = 1;
       renderPaginatedResults();
     }
 
-    function setupCategoryPage(cat) {
+    async function setupCategoryPage(cat) {
       currentPage = 1;
       const filterContainer = document.getElementById('search-filters');
       const headerBox = document.getElementById('category-search-header');
+      document.getElementById('cat-results').innerHTML = '<p style="text-align:center; width:100%;">データを取得中...</p>';
 
       if (cat === 'all') {
         headerBox.style.display = 'none';
-        currentFilteredResults = [...reviews];
+        document.getElementById('cat-result-title').innerText = `すべての口コミ`;
       } else {
         headerBox.style.display = 'block';
         document.getElementById('cat-title').innerText = `${cat}を探す`;
+        document.getElementById('cat-result-title').innerText = `${cat}の新着一覧`;
 
         let html = '';
         if(FILTER_DATA[cat]){
@@ -734,27 +798,58 @@
           });
         }
         filterContainer.innerHTML = html;
-
-        currentFilteredResults = reviews.filter(p => p.cat === cat);
-        document.getElementById('cat-result-title').innerText = `${cat}の新着一覧`;
       }
+
+      try {
+        let q;
+        if (cat === 'all') {
+          q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
+        } else {
+          q = query(collection(db, "reviews"), where("cat", "==", cat), orderBy("createdAt", "desc"), limit(100));
+        }
+
+        const snap = await getDocs(q);
+        const results =[];
+        snap.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
+        currentFilteredResults = results;
+      } catch (e) {
+        console.error("カテゴリ一覧取得エラー:", e);
+        currentFilteredResults =[];
+      }
+      
       renderPaginatedResults();
     }
 
     function toggleTag(el) { el.classList.toggle('active'); }
 
-    function applyFilterSearch() {
+    async function applyFilterSearch() {
       const activeTags = Array.from(document.querySelectorAll('#search-filters .tag.active')).map(el => el.innerText);
 
-      currentFilteredResults = reviews.filter(p => {
-        if (currentCategory !== 'all' && p.cat !== currentCategory) return false;
-        if (activeTags.length > 0) {
-          if(!p.tags) return false;
-          const hasTag = activeTags.some(t => p.tags.includes(t));
-          if (!hasTag) return false;
+      try {
+        let q;
+        if (currentCategory !== 'all') {
+          q = query(collection(db, "reviews"), where("cat", "==", currentCategory), orderBy("createdAt", "desc"), limit(100));
+        } else {
+          q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(100));
         }
-        return true;
-      });
+
+        const snap = await getDocs(q);
+        let results =[];
+        snap.forEach(doc => {
+          const d = doc.data();
+          let isMatch = true;
+          if (activeTags.length > 0) {
+            if(!d.tags) isMatch = false;
+            else isMatch = activeTags.some(t => d.tags.includes(t));
+          }
+          if(isMatch) results.push({ id: doc.id, ...d });
+        });
+
+        currentFilteredResults = results;
+      } catch (e) {
+        console.error("絞り込みエラー:", e);
+        currentFilteredResults =[];
+      }
 
       document.getElementById('cat-result-title').innerText = '検索結果';
       currentPage = 1;
@@ -780,7 +875,7 @@
       if (totalPages > 1) {
         let pHTML = '';
         for(let i=1; i<=totalPages; i++){
-          pHTML += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+          pHTML += `<button type="button" class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
         }
         pagiContainer.innerHTML = pHTML;
       } else {
@@ -796,21 +891,24 @@
 
     function createCardHtml(p) {
       let stars = '';
-      for(let i=0; i<5; i++) stars += (i < p.stars) ? '★' : '☆';
+      const starCount = p.stars || 0;
+      for(let i=0; i<5; i++) stars += (i < starCount) ? '★' : '☆';
       const displayTags = (p.tags && p.tags.length > 0) ? p.tags.slice(0, 3).map(t => escapeHTML(t)).join(' / ') : '';
      
-      const imgSrc = p.img || `https://placehold.jp/${p.color.replace('#','')}/ffffff/300x200.png?text=No+Image`;
+      const colorHex = p.color ? p.color.replace('#','') : '888888';
+      const catColor = p.color || '#888';
+      const imgSrc = p.img || `https://placehold.jp/${colorHex}/ffffff/300x200.png?text=No+Image`;
       
       const uName = p.userName ? escapeHTML(p.userName) : 'ゲストユーザー';
 
       return `
         <a onclick="showDetail('${p.id}')" class="c-card" style="cursor:pointer;">
           <div class="c-card__img">
-            <span class="c-cat-label" style="background:${p.color};">${escapeHTML(p.cat)}</span>
-            <img src="${imgSrc}" alt="${escapeHTML(p.title)}">
+            <span class="c-cat-label" style="background:${catColor};">${escapeHTML(p.cat || 'その他')}</span>
+            <img src="${imgSrc}" alt="${escapeHTML(p.title || '無題')}">
           </div>
           <div class="c-card__body">
-            <h3 class="c-card__title">${escapeHTML(p.title)}</h3>
+            <h3 class="c-card__title">${escapeHTML(p.title || '無題')}</h3>
             <div class="c-rating">${stars} <span style="color:#888; font-size:11px; margin-left:5px;"><i class="fas fa-user-circle"></i> ${uName}</span></div>
             <div style="font-size:12px; color:#888; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
               <i class="fas fa-tag"></i> ${displayTags}
@@ -819,24 +917,37 @@
         </a>`;
     }
 
-    // --- 詳細ページ ---
-    function showDetail(id, pushHistory = true) {
-      const item = reviews.find(r => r.id === id);
-      if(!item) {
-        router('home'); 
-        return;
-      }
+    async function showDetail(id, pushHistory = true) {
       currentDetailId = id;
       router('detail', null, false); 
+      document.getElementById('detail-content').innerHTML = '<p>読み込み中...</p>';
+      document.getElementById('detail-comments').innerHTML = '';
 
-      const title = `${escapeHTML(item.title)}の口コミ・評判 | ミライルーツ`;
+      let item = recentReviewsCache.find(r => r.id === id);
+      if(!item) {
+        try {
+          const docRef = doc(db, "reviews", id);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            item = { id: docSnap.id, ...docSnap.data() };
+          } else {
+            router('home'); return;
+          }
+        } catch(e) {
+          console.error("詳細取得エラー", e);
+          router('home'); return;
+        }
+      }
+
+      const title = `${escapeHTML(item.title || '無題')}の口コミ・評判｜子供英語教材レビュー | ミライルーツ`;
       document.title = title;
       if (pushHistory) {
         history.pushState(null, title, `?id=${id}`);
       }
 
       let stars = '';
-      for(let i=0; i<5; i++) stars += (i < item.stars) ? '★' : '☆';
+      const starCount = item.stars || 0;
+      for(let i=0; i<5; i++) stars += (i < starCount) ? '★' : '☆';
 
       let urlDisplay = '';
       if(item.url) {
@@ -848,14 +959,18 @@
         `;
       }
 
-      const imgSrc = item.img || `https://placehold.jp/${item.color.replace('#','')}/ffffff/300x200.png?text=No+Image`;
+      const colorHex = item.color ? item.color.replace('#','') : '888888';
+      const catColor = item.color || '#888';
+      const imgSrc = item.img || `https://placehold.jp/${colorHex}/ffffff/300x200.png?text=No+Image`;
       const tagsHtml = item.tags ? item.tags.map(t => `<span class="tag" style="cursor:default;">${escapeHTML(t)}</span>`).join('') : '';
-
       const uName = item.userName ? escapeHTML(item.userName) : 'ゲストユーザー';
 
+      const shareUrl = encodeURIComponent(location.href);
+      const shareText = encodeURIComponent((item.title || '口コミ記事') + ' | ミライルーツ');
+
       document.getElementById('detail-content').innerHTML = `
-        <span class="c-cat-label" style="position:static; display:inline-block; background:${item.color}; transform:none; margin-bottom:10px;">${escapeHTML(item.cat)}</span>
-        <h2 style="font-size:24px; margin:0 0 5px;">${escapeHTML(item.title)}</h2>
+        <span class="c-cat-label" style="position:static; display:inline-block; background:${catColor}; transform:none; margin-bottom:10px;">${escapeHTML(item.cat || 'その他')}</span>
+        <h2 style="font-size:24px; margin:0 0 5px;">${escapeHTML(item.title || '無題')}</h2>
         <div style="font-size:13px; color:#666; margin-bottom:10px;"><i class="fas fa-user-circle"></i> ${uName} さんの口コミ</div>
         <div class="c-rating" style="font-size:18px; margin-bottom:15px;">${stars}</div>
         <img src="${imgSrc}" style="width:100%; max-width:500px; border-radius:10px; border:2px solid #ddd; margin-bottom:20px;">
@@ -866,18 +981,30 @@
 
         <div style="background:var(--bg-cream); padding:20px; border-radius:10px; border:1px solid #eee;">
           <h4 style="margin-top:0; color:var(--text-brown);">良い点・おすすめポイント</h4>
-          <p style="white-space: pre-wrap;">${escapeHTML(item.goodPoint)}</p>
+          <p style="white-space: pre-wrap;">${escapeHTML(item.goodPoint || '')}</p>
         </div>
 
         ${urlDisplay}
+
+        <!-- シェアボタン -->
+        <div style="margin-top:20px; display:flex; gap:10px; align-items:center;">
+          <span style="font-size:14px; font-weight:bold; color:var(--text-brown);">シェアする：</span>
+          <a href="https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}" target="_blank" style="background:#1DA1F2; color:#fff; padding:5px 10px; border-radius:5px; font-size:14px;"><i class="fab fa-twitter"></i> X</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" style="background:#1877F2; color:#fff; padding:5px 10px; border-radius:5px; font-size:14px;"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="https://social-plugins.line.me/lineit/share?url=${shareUrl}" target="_blank" style="background:#06C755; color:#fff; padding:5px 10px; border-radius:5px; font-size:14px;"><i class="fab fa-line"></i> LINE</a>
+        </div>
       `;
      
-      const commentsQuery = query(collection(db, "comments"), where("itemId", "==", currentDetailId), orderBy("createdAt", "asc"));
-      onSnapshot(commentsQuery, (snapshot) => {
+      try {
+        const commentsQuery = query(collection(db, "comments"), where("itemId", "==", currentDetailId), orderBy("createdAt", "asc"));
+        const cSnap = await getDocs(commentsQuery);
         const comments =[];
-        snapshot.forEach(doc => comments.push(doc.data()));
+        cSnap.forEach(doc => comments.push(doc.data()));
         renderComments(comments);
-      });
+      } catch (e) {
+        console.error("コメント取得エラー", e);
+        document.getElementById('detail-comments').innerHTML = '<p style="color:#888; font-size:14px;">コメントを読み込めませんでした。</p>';
+      }
     }
 
     function renderComments(commentsData) {
@@ -887,11 +1014,12 @@
       } else {
         container.innerHTML = commentsData.map(c => {
           let s = '';
-          for(let i=0; i<5; i++) s += (i < c.star) ? '★' : '☆';
+          const starCount = c.star || 0;
+          for(let i=0; i<5; i++) s += (i < starCount) ? '★' : '☆';
           return `
             <div class="comment-box">
-              <div class="comment-header"><span><i class="fas fa-user-circle"></i> ${escapeHTML(c.user)}</span> <span style="color:#f39c12;">${s}</span></div>
-              <p style="margin:0; font-size:14px; white-space:pre-wrap;">${escapeHTML(c.text)}</p>
+              <div class="comment-header"><span><i class="fas fa-user-circle"></i> ${escapeHTML(c.user || 'ゲスト')}</span> <span style="color:#f39c12;">${s}</span></div>
+              <p style="margin:0; font-size:14px; white-space:pre-wrap;">${escapeHTML(c.text || '')}</p>
             </div>
           `;
         }).join('');
@@ -900,6 +1028,13 @@
 
     async function submitComment(e) {
       e.preventDefault();
+
+      const lastPost = localStorage.getItem("lastCommentTime");
+      if (lastPost && Date.now() - parseInt(lastPost) < 60000) {
+        alert("連続投稿はできません。1分以上間隔を空けてください。");
+        return;
+      }
+
       const btn = document.getElementById('btn-submit-comment');
       btn.disabled = true;
       btn.innerText = "送信中...";
@@ -917,8 +1052,13 @@
           createdAt: serverTimestamp()
         });
 
+        localStorage.setItem("lastCommentTime", Date.now().toString());
+
         document.getElementById('comment-text').value = '';
         document.getElementById('comment-name').value = '';
+        
+        showDetail(currentDetailId, false);
+
       } catch (error) {
         console.error("コメント投稿エラー:", error);
         alert("エラーが発生しました。");
@@ -928,7 +1068,6 @@
       }
     }
 
-    // --- 投稿フォーム ---
     function updateFormFields() {
       const cat = document.getElementById('input-cat').value;
       const container = document.getElementById('dynamic-form-fields');
@@ -951,6 +1090,13 @@
 
     async function submitReview(e) {
       e.preventDefault();
+
+      const lastPost = localStorage.getItem("lastReviewTime");
+      if (lastPost && Date.now() - parseInt(lastPost) < 60000) {
+        alert("連続投稿はできません。1分以上間隔を空けてください。");
+        return;
+      }
+
       const btn = document.getElementById('btn-submit-review');
       btn.disabled = true;
       btn.innerText = "送信中...";
@@ -967,12 +1113,17 @@
         const checkboxes = document.querySelectorAll('#dynamic-form-fields input[type="checkbox"]:checked');
         checkboxes.forEach(cb => tags.push(cb.value));
 
-        // 写真アップロードの処理
         const fileInput = document.getElementById('input-image');
         const file = fileInput.files[0];
         let imageUrl = '';
 
         if (file) {
+          if (file.size > 2 * 1024 * 1024) { 
+            alert("画像のサイズは2MB以下にしてください。");
+            btn.disabled = false;
+            btn.innerText = "投稿する";
+            return;
+          }
           const fileName = `images/${Date.now()}_${Math.random().toString(36).substring(2, 8)}_${file.name}`;
           const storageRef = ref(storage, fileName);
           await uploadBytes(storageRef, file);
@@ -987,10 +1138,12 @@
           goodPoint: goodPoint,
           url: url,
           tags: tags,
-          img: imageUrl, // アップロードされた画像のURLを保存
+          img: imageUrl,
           color: getColorForCat(cat),
           createdAt: serverTimestamp()
         });
+
+        localStorage.setItem("lastReviewTime", Date.now().toString());
 
         alert('投稿ありがとうございます！');
         document.getElementById('input-username').value = '';
@@ -1000,7 +1153,7 @@
         document.getElementById('input-image').value = '';
         checkboxes.forEach(cb => cb.checked = false);
        
-        router('home'); // 投稿後はホームへ
+        await initApp();
 
       } catch (error) {
         console.error("投稿エラー: ", error);
@@ -1021,10 +1174,42 @@
       return '#888';
     }
 
-    // =========================================================================
-    // HTMLのonclickから呼び出せるようにグローバル(window)に紐付け
-    // =========================================================================
+    async function loadAdminReviews() {
+      try {
+        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(50));
+        const snap = await getDocs(q);
+        let html = '<table style="width:100%; border-collapse:collapse; font-size:14px; text-align:left;">';
+        html += '<tr style="background:#eee;"><th style="padding:8px;">タイトル</th><th style="padding:8px;">ユーザー</th><th style="padding:8px; text-align:center;">アクション</th></tr>';
+        snap.forEach(docSnap => {
+          const d = docSnap.data();
+          html += `<tr style="border-bottom:1px solid #ccc;">
+            <td style="padding:8px;">${escapeHTML(d.title || '無題')}</td>
+            <td style="padding:8px;">${escapeHTML(d.userName || 'ゲスト')}</td>
+            <td style="padding:8px; text-align:center;"><button type="button" onclick="deleteReview('${docSnap.id}')" style="background:red; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">削除</button></td>
+          </tr>`;
+        });
+        html += '</table>';
+        document.getElementById('admin-review-list').innerHTML = html;
+      } catch (e) {
+        console.error("管理データ取得エラー", e);
+      }
+    }
+
+    async function deleteReview(id) {
+      if(!confirm("本当にこの投稿を削除しますか？")) return;
+      try {
+        await deleteDoc(doc(db, "reviews", id));
+        alert("削除しました。");
+        loadAdminReviews();
+        initApp();
+      } catch(e) {
+        alert("削除に失敗しました。ルールの権限を確認してください。");
+      }
+    }
+
+    // 【修正箇所】 ボタンの動作を保証するための設定を一番最後に配置しました
     window.router = router;
+    window.searchByKeyword = searchByKeyword;
     window.searchByTag = searchByTag;
     window.toggleTag = toggleTag;
     window.applyFilterSearch = applyFilterSearch;
@@ -1033,10 +1218,13 @@
     window.submitComment = submitComment;
     window.updateFormFields = updateFormFields;
     window.submitReview = submitReview;
+    window.loadAdminReviews = loadAdminReviews;
+    window.deleteReview = deleteReview;
 
-    // --- 初期化 ---
+    // --- 初期化処理 ---
     setupAds();
     updateFormFields();
+    initApp();
 
   </script>
 </body>
